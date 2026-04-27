@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f6fa;
+}
+
+.container {
+    display: flex;
+    width: 900px;
+    height: 500px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* LEFT */
+.left {
+    width: 45%;
+    background: linear-gradient(135deg, #4b2aad, #6a3dd9);
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.left h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.left h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.left p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.logo {
+    width: 45px;
+    margin-bottom: 15px;
+}
+
+.bottom-text {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* RIGHT */
+.right {
+    width: 55%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right h2 {
+    margin-bottom: 10px;
+}
+
+.right p {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-size: 13px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #6a3dd9;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4b2aad, #6a3dd9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-bottom: 10px;
+}

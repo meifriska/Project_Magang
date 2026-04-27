@@ -1,0 +1,274 @@
+/* RESET */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background: #f5f6fa;
+}
+
+/* LAYOUT */
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    width: 250px;
+    background: #ffffff;
+    height: 100vh;
+    padding: 25px 20px;
+    border-right: 1px solid #eee;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* LOGO */
+.logo {
+    margin-bottom: 25px;
+}
+
+.logo strong {
+    font-size: 16px;
+}
+
+.logo small {
+    font-size: 12px;
+    color: #888;
+}
+
+/* MENU */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    /* padding: 12px 14px; */
+    border-radius: 10px;
+    margin-bottom: 8px;
+    /* cursor: pointer; */
+    font-size: 14px;
+    list-style: none;
+}
+
+/* AKTIF */
+.menu li.active {
+    background: #4b2aad;
+    color: white;
+}
+
+/* HOVER */
+.menu li:hover {
+    background: #f1f1f1;
+}
+
+/* HELP BOX */
+.help-box {
+    margin-top: auto;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+/* ================= MAIN ================= */
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= HEADER ================= */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100% - 250px);
+
+    background: white;
+    z-index: 1000;
+
+    padding: 15px 30px;
+    border-bottom: 1px solid #eee;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* USER */
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+/* ================= CONTENT ================= */
+.content {
+    padding: 25px 30px;
+    flex: 1;
+    overflow-y: auto;
+
+    margin-top: 80px; /* tinggi header */
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #4b2aad, #6a4df5);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* FORM CARD */
+.form-card {
+    padding: 20px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* BUTTON */
+.btn-primary {
+    background: #4b2aad;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #3a1f8a;
+}
+
+/* INPUT FILE */
+input[type="file"] {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* SCROLL HALUS */
+.content {
+    scroll-behavior: smooth;
+}
+
+.menu li a {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+
+    text-decoration: none !important;
+    color: #333 !important;
+}
+
+/* HOVER */
+.menu li a:hover {
+    background: #f1f1f1;
+    color: #000 !important;
+}
+
+/* ACTIVE */
+.menu li.active a {
+    background: #4b2aad;
+    color: white !important;
+}
+
+/* 🔥 PAKSA TOTAL LINK JADI BUKAN LINK */
+.sidebar .menu li a,
+.sidebar .menu li a:link,
+.sidebar .menu li a:visited,
+.sidebar .menu li a:hover,
+.sidebar .menu li a:active {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.sidebar .menu li a {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #333 !important;
+}
+
+/* hover */
+.sidebar .menu li a:hover {
+    background: #f1f1f1;
+}
+
+/* active */
+.sidebar .menu li.active a {
+    background: #4b2aad;
+    color: #fff !important;
+}
+
+.hero small {
+    opacity: 0.9;
+    font-size: 13px;
+}
+
+/* avatar hover */
+.avatar-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #4b2aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.avatar-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* dropdown */
+.dropdown-user {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 8px 0;
+    display: none;
+    min-width: 120px;
+    z-index: 999;
+}
+
+.dropdown-user a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-user a:hover {
+    background: #f5f5f5;
+}

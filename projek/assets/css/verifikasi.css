@@ -1,0 +1,64 @@
+body {
+    background: #f5f6fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* NAVBAR */
+.topbar {
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+/* WRAPPER */
+.wrapper {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-card {
+    width: 900px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: white;
+}
+
+/* LEFT */
+.left {
+    background: linear-gradient(135deg, #4b2aad, #6a4df5);
+    color: white;
+    padding: 40px;
+}
+
+/* RIGHT */
+.right {
+    padding: 40px;
+}
+
+/* OTP */
+.kode {
+    width: 50px;
+    height: 55px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* BUTTON */
+.btn-primary {
+    background: #4b2aad;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #3a1f8a;
+}
+
+/* FOOTER */
+.footer {
+    font-size: 12px;
+    color: #999;
+}
