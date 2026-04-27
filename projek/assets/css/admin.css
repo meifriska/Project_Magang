@@ -1,0 +1,47 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f6fa;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: #4b2aad;
+    color: white;
+    min-height: 100vh;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.menu li.active,
+.menu li:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* HEADER */
+.header {
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+/* CARD */
+.card-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
