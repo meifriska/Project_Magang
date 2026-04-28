@@ -130,6 +130,7 @@ if (isset($_POST['update_admin'])) {
         <li><a href="syarat.php"><i class="bi bi-file-earmark-text"></i> Tambah Syarat Permohonan</a></li>
         <li><a href="laporan.php"><i class="bi bi-clipboard-data"></i> Laporan</a></li>
         <li><a href="chat.php"><i class="bi bi-chat-dots"></i> Chat</a></li>
+        <li><a href="chat.php"><i class="bi bi-chat-dots"></i> Chat</a></li>
     </ul>
 </div>
 
