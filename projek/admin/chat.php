@@ -11,8 +11,8 @@ if (isset($_POST['balas'])) {
     if ($id_user_post != 0 && $pesan != '') {
 
         mysqli_query($conn, "
-            INSERT INTO chat (id_user, pengirim, pesan)
-            VALUES ('$id_user_post', 'admin', '$pesan')
+            INSERT INTO chat (id_user, pengirim, pesan, is_read)
+            VALUES ('$id_user_post', 'admin', '$pesan', 1)
         ");
 
         // 🔥 redirect biar gak double kirim & tetap di user yg sama
@@ -23,13 +23,29 @@ if (isset($_POST['balas'])) {
 
 // 🔥 QUERY USER LIST
 $qUser = mysqli_query($conn, "
-    SELECT DISTINCT u.id_user, u.nama_lengkap
-    FROM chat c
-    JOIN user u ON c.id_user = u.id_user
+    SELECT u.id_user, u.nama_lengkap,
+    COUNT(c.id_chat) as jumlah,
+    MAX(c.waktu) as terakhir
+    FROM user u
+    LEFT JOIN chat c
+        ON u.id_user = c.id_user
+        AND c.pengirim='user'
+        AND c.is_read=0
+    GROUP BY u.id_user
+    ORDER BY terakhir DESC
 ");
 
 // 🔥 AMBIL ID USER YANG DIPILIH
 $id_user = $_GET['id_user'] ?? 0;
+
+if ($id_user != 0) {
+    mysqli_query($conn, "
+        UPDATE chat 
+        SET is_read = 1 
+        WHERE id_user='$id_user'
+        AND pengirim='user'
+    ");
+}
 
 // 🔥 QUERY CHAT
 $qChat = mysqli_query($conn, "
@@ -116,13 +132,19 @@ $qChat = mysqli_query($conn, "
 
 <?php while($u = mysqli_fetch_assoc($qUser)) { ?>
 
-    <div class="user-item"
-         onclick="window.location='chat.php?id_user=<?= $u['id_user'] ?>'">
+    <div class="user-item d-flex justify-content-between align-items-center"
+        onclick="window.location='chat.php?id_user=<?= $u['id_user'] ?>'">
 
-        👤 <?= $u['nama_lengkap'] ?>
+        <div class="d-flex align-items-center gap-2">
+            <span>👤</span>
+            <span><?= $u['nama_lengkap'] ?></span>
+        </div>
+
+        <?php if ($u['jumlah'] > 0): ?>
+            <span class="badge bg-danger rounded-pill"><?= $u['jumlah'] ?></span>
+        <?php endif; ?>
 
     </div>
-
 <?php } ?>
 
 </div>
