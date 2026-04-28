@@ -2,6 +2,14 @@
 session_start();
 include '../config/koneksi.php';
 
+$id_user = $_SESSION['id_user'];
+
+$cekUser = mysqli_query($conn, "SELECT status_akun FROM user WHERE id_user='$id_user'");
+$dataUser = mysqli_fetch_assoc($cekUser);
+
+// 🔥 UPDATE SESSION BIAR SELALU SYNC
+$_SESSION['status'] = $dataUser['status_akun'];
+
 
 $id_user = $_SESSION['id_user'];
 $nama = $_SESSION['nama'] ?? 'User';
@@ -101,14 +109,6 @@ if (isset($_POST['simpan'])) {
 </head>
 
 <body> 
-<?php
-if (isset($_SESSION['status']) && $_SESSION['status'] == 'nonaktif') {
-    echo "<div class='alert alert-danger text-center m-3'>
-        🔒 Akun Anda dinonaktifkan. Mohon hubungi admin.
-    </div>";
-}
-?>
-
 <div class="layout">
 
 <!-- SIDEBAR -->
@@ -173,6 +173,19 @@ if (isset($_SESSION['status']) && $_SESSION['status'] == 'nonaktif') {
             <h3>Pengajuan Rekomendasi Kegiatan DPRD Jatim</h3>
             <p>Silahkan lengkapi informasi detail kegiatan yang akan dilaksanakan untuk mendapatkan surat rekomendasi resmi dari sekretariat DPRD Provinsi Jawa Timur.</p>
         </div>
+
+    <?php
+    // 🔒 PRIORITAS 1: akun diblokir
+    if (isset($_SESSION['status']) && $_SESSION['status'] == 'tidak aktif') {
+    ?>
+
+    <div class="alert alert-danger">
+        🔒 Akun Anda dinonaktifkan. <br>
+        Silakan hubungi admin untuk mengaktifkan kembali akun Anda.
+    </div>
+
+    <?php return; } ?>
+
 
     <?php if ($blokir) { ?>
 
