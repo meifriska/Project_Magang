@@ -2,6 +2,8 @@
 session_start();
 include '../config/koneksi.php';
 
+
+
 $id_user = $_SESSION['id_user'];
 
 $cekUser = mysqli_query($conn, "SELECT status_akun FROM user WHERE id_user='$id_user'");
@@ -41,6 +43,27 @@ while($c = mysqli_fetch_assoc($cek)) {
     }
 }
 
+session_start();
+
+// 🔥 ambil data form dari session (kalau ada)
+$form = $_SESSION['form'] ?? [];
+$uploaded = $_SESSION['uploaded'] ?? [];
+
+// 🔥 kalau submit form → simpan ke session lalu ke preview
+if (isset($_POST['submit'])) {
+
+    // simpan data form
+    $_SESSION['form'] = $_POST;
+
+    // 🔥 simpan data file (nama file hasil upload)
+    $_SESSION['uploaded'] = $_SESSION['uploaded'] ?? [];
+    // pindah ke halaman preview
+    header("Location: preview.php");
+    exit;
+}
+
+
+
 if (isset($_POST['simpan'])) {
 
     $_SESSION['form'] = $_POST;
@@ -56,37 +79,56 @@ if (isset($_POST['simpan'])) {
         return $nama;
     }
 
-    $_SESSION['uploaded'] = [
-        'tor' => uploadPreview('tor', $folder),
-        'surat_bpsdm' => uploadPreview('surat_bpsdm', $folder),
-        'jadwal' => uploadPreview('jadwal', $folder),
-        'penawaran' => uploadPreview('penawaran', $folder),
-        'mou' => uploadPreview('mou', $folder),
-        'balasan' => uploadPreview('balasan', $folder),
-        'akreditasi' => uploadPreview('akreditasi', $folder),
-        'undangan' => uploadPreview('undangan', $folder),
+    // 🔥 ambil data lama dulu
+    $uploaded_lama = $_SESSION['uploaded'] ?? [];
 
+    $uploaded_baru = [];
+
+    $fields = [
+        'tor','surat_bpsdm','jadwal','penawaran',
+        'mou','balasan','akreditasi','undangan'
     ];
 
-    // 🔥 TAMBAHAN WAJIB (SYARAT FILE DINAMIS)
-        $syarat = mysqli_query($conn, "SELECT * FROM syarat_permohonan WHERE tipe='file'");
+    foreach ($fields as $f) {
 
-        while($s = mysqli_fetch_assoc($syarat)) {
+        $file_baru = uploadPreview($f, $folder);
 
-            $field = 'syarat_'.$s['id_syarat'];
-
-            if (!empty($_FILES[$field]['name'])) {
-
-                $nama_file = time() . '_' . $_FILES[$field]['name'];
-
-                move_uploaded_file(
-                    $_FILES[$field]['tmp_name'],
-                    $folder . $nama_file
-                );
-
-                $_SESSION['uploaded'][$field] = $nama_file;
-            }
+        if ($file_baru) {
+            // kalau upload baru → pakai baru
+            $uploaded_baru[$f] = $file_baru;
+        } else {
+            // 🔥 kalau tidak upload → pakai lama
+            $uploaded_baru[$f] = $uploaded_lama[$f] ?? '';
         }
+    }
+
+    // 🔥 SIMPAN HASIL GABUNGAN
+    $_SESSION['uploaded'] = $uploaded_baru;
+
+    // 🔥 SYARAT DINAMIS
+    $syarat = mysqli_query($conn, "SELECT * FROM syarat_permohonan WHERE tipe='file'");
+
+    while($s = mysqli_fetch_assoc($syarat)) {
+
+        $field = 'syarat_'.$s['id_syarat'];
+
+        if (!empty($_FILES[$field]['name'])) {
+
+            $nama_file = time() . '_' . $_FILES[$field]['name'];
+
+            move_uploaded_file(
+                $_FILES[$field]['tmp_name'],
+                $folder . $nama_file
+            );
+
+            $_SESSION['uploaded'][$field] = $nama_file;
+
+        } else {
+            // 🔥 pakai file lama kalau tidak upload ulang
+            $_SESSION['uploaded'][$field] = $uploaded_lama[$field] ?? '';
+        }
+    }
+
     header("Location: preview.php");
     exit;
 }
