@@ -2,6 +2,7 @@
 session_start();
 include '../config/koneksi.php';
 
+
 // 🔥 kalau tidak ada data → balik ke index
 if (!isset($_SESSION['form'])) {
     header("Location: index.php");
@@ -232,7 +233,9 @@ function fileItem($label, $field) {
 </ul>
             <!-- TOMBOL -->
             <div class="d-flex justify-content-end gap-2 mt-4">
-
+                <?php
+                $_SESSION['uploaded'] = $uploaded;
+                ?>
                 <a href="index.php" class="btn btn-warning">
                     ✏️ Edit
                 </a>
