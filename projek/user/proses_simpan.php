@@ -103,10 +103,13 @@ unset($_SESSION['uploaded']);
 unset($_SESSION['form']);
 unset($_SESSION['files']);
 
+header("Location: index.php");
+exit;
+
 // =====================
 // REDIRECT
 // =====================
-echo "<script>
-alert('Berhasil disimpan!');
-window.location='index.php';
-</script>";
+// echo "<script>
+// alert('Berhasil disimpan!');
+// window.location='index.php';
+// </script>";
